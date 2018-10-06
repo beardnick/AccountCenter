@@ -116,17 +116,31 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/change")
+    public ResultMap update(MysqlAccount account, HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        System.out.println(account.getEmail() +
+                account.getName() +
+                account.getAvatar() +
+                account.getGroup());
+        account.setEmail(account.getEmail());
+        repository.save(account);
+        return ResultMap.success("修改成功");
+    }
+
     @RequestMapping("/upload/avatar")
     public ResultMap editAvatar(
             @RequestParam("file")MultipartFile file,
             HttpServletResponse response
-            ){ response.addHeader("Access-Control-Allow-Origin", "*");
+            ){
+        response.addHeader("Access-Control-Allow-Origin", "*");
         if(file.isEmpty()){
             return ResultMap.error("文件为空");
         }
-        String path = "/data/avatar";
+        String path = "/data/avatar/";
         File serverFile = new File(path + file.getOriginalFilename());
         File dir = new File(path);
+        System.out.println("开始上传");
         if(! dir.exists()){
             dir.mkdir();
         }
