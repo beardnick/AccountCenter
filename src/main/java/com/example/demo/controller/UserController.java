@@ -4,9 +4,22 @@ import com.example.demo.dao.MysqlAccountRepository;
 import com.example.demo.model.MysqlAccount;
 import com.example.demo.util.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 
@@ -57,6 +70,8 @@ public class UserController {
             account.setPassword(password);
             account.setName(name);
             account.setGroup(group);
+            account.setInTime(new Date());
+            repository.save(account);
             return  ResultMap.success();
         }
     }
@@ -78,5 +93,75 @@ public class UserController {
             return ResultMap.success(account);
         }
     }
+
+    @RequestMapping("/byemail")
+    public ResultMap findByemail(@PathParam("email")String email, HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        MysqlAccount account = null;
+        if((account = repository.findByEmail(email)) == null){
+            return ResultMap.error("未查到邮箱为" + email + "的用户");
+        }else{
+            return ResultMap.success(account);
+        }
+    }
+
+    @RequestMapping("/bygroup")
+    public ResultMap byGroup(@PathParam("group")String group, HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        List<MysqlAccount> accounts = null;
+        if((accounts = repository.findAllByGroup(group)) == null){
+            return ResultMap.error("未查到名字为" + group + "的组");
+        }else{
+            return ResultMap.success(accounts);
+        }
+    }
+
+    @RequestMapping("/upload/avatar")
+    public ResultMap editAvatar(
+            @RequestParam("file")MultipartFile file,
+            HttpServletResponse response
+            ){ response.addHeader("Access-Control-Allow-Origin", "*");
+        if(file.isEmpty()){
+            return ResultMap.error("文件为空");
+        }
+        String path = "/data/avatar";
+        File serverFile = new File(path + file.getOriginalFilename());
+        File dir = new File(path);
+        if(! dir.exists()){
+            dir.mkdir();
+        }
+        try {
+            file.transferTo(serverFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResultMap.error("上传失败");
+        }
+        return ResultMap.success("http://api.52feidian.com/api/avatar/" + file.getOriginalFilename());
+    }
+
+//    @RequestMapping("/avatar/{name}")
+//    public void getAvatar(@PathVariable("name")String name,
+//                          HttpServletResponse response){
+//        response.addHeader("Access-Control-Allow-Origin", "*");
+//        response.setContentType("image/png");
+//        System.out.println(name);
+//        String imType = name.substring(name.lastIndexOf('.') + 1);
+//        System.out.println("imType:" + imType);
+////        response.setContentType("image/" + imType);
+//        try {
+//            FileInputStream fromServer = new FileInputStream(
+//                    new File("/data/avatar/" + name)
+//            );
+//            OutputStream toClient = response.getOutputStream();
+//            byte[] avatar = new byte[fromServer.available()];
+//            fromServer.read(avatar);
+//            toClient.write(avatar);
+//            toClient.flush();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }
