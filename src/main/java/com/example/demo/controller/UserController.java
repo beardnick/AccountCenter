@@ -4,22 +4,16 @@ import com.example.demo.dao.MysqlAccountRepository;
 import com.example.demo.model.MysqlAccount;
 import com.example.demo.util.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 
@@ -45,7 +39,7 @@ public class UserController {
     @PostMapping("/login")
     public ResultMap login(String email, String password, HttpServletResponse response){
         response.addHeader("Access-Control-Allow-Origin", "*");
-        if(repository.findByEmailAndPassword(email, password) != null){
+        if(containBean(email,password)){
             return ResultMap.success();
         }else{
             return ResultMap.error("帐号,密码错误或帐号不存在");
@@ -57,12 +51,13 @@ public class UserController {
                               String password,
                               String name,
                               String group,
+                              String id,
                               HttpServletResponse response){
         response.addHeader("Access-Control-Allow-Origin", "*");
 //        if(! password.equals(confirmPass)){
 //            return ResultMap.error("两次密码不一致");
 //        }
-        if(repository.findByEmail(email) != null){
+        if(containBean(email)){
             return ResultMap.error("邮箱已经被注册过了");
         }else{
             MysqlAccount account = new MysqlAccount();
@@ -71,6 +66,8 @@ public class UserController {
             account.setName(name);
             account.setGroup(group);
             account.setInTime(new Date());
+            account.setId(id);
+            account.setAdmin(false);
             repository.save(account);
             return  ResultMap.success();
         }
@@ -86,7 +83,7 @@ public class UserController {
     @RequestMapping("/byname")
     public ResultMap findByname(@PathParam("name")String name, HttpServletResponse response){
         response.addHeader("Access-Control-Allow-Origin", "*");
-        MysqlAccount account = null;
+        MysqlAccount account;
         if((account = repository.findByName(name)) == null){
             return ResultMap.error("未查到名字为" + name + "的用户");
         }else{
@@ -108,7 +105,7 @@ public class UserController {
     @RequestMapping("/bygroup")
     public ResultMap byGroup(@PathParam("group")String group, HttpServletResponse response){
         response.addHeader("Access-Control-Allow-Origin", "*");
-        List<MysqlAccount> accounts = null;
+        List<MysqlAccount> accounts;
         if((accounts = repository.findAllByGroup(group)) == null){
             return ResultMap.error("未查到名字为" + group + "的组");
         }else{
@@ -123,9 +120,13 @@ public class UserController {
                 account.getName() +
                 account.getAvatar() +
                 account.getGroup());
-        account.setEmail(account.getEmail());
-        repository.save(account);
-        return ResultMap.success("修改成功");
+//        account.setEmail(account.getEmail());
+        if(containBean(account.getEmail())){
+            repository.save(account);
+            return ResultMap.success("修改成功");
+        }else {
+            return ResultMap.error("不存在email为" + account.getEmail() + "的用户");
+        }
     }
 
     @RequestMapping("/upload/avatar")
@@ -151,6 +152,25 @@ public class UserController {
             return ResultMap.error("上传失败");
         }
         return ResultMap.success("http://api.52feidian.com/api/avatar/" + file.getOriginalFilename());
+    }
+
+    @RequestMapping("/delete")
+    public ResultMap delete(String email, HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", "*");
+       if(containBean(email)){
+           repository.deleteByEmail(email);
+           return ResultMap.success(repository.findAll());
+       }else {
+           return ResultMap.error("没有找到email为" + email + "的用户");
+       }
+    }
+
+    private boolean containBean(String email){
+        return repository.findByEmail(email) != null;
+    }
+
+    private boolean containBean(String email, String password){
+        return repository.findByEmailAndPassword(email, password) != null;
     }
 
 //    @RequestMapping("/avatar/{name}")

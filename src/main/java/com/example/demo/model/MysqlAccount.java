@@ -24,6 +24,12 @@ public class MysqlAccount implements Serializable {
     @Id
     private String email;
 
+    @Column
+    private String id;
+
+    @Column
+    private boolean admin;
+
     @Column(nullable = false)
     private String password;
 
@@ -31,7 +37,7 @@ public class MysqlAccount implements Serializable {
     private String name;
 
     @Column
-    private int sex;
+    private String sex;
 
     @Column
     private String nickname;
@@ -149,11 +155,11 @@ public class MysqlAccount implements Serializable {
         this.password = password;
     }
 
-    public int getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -291,5 +297,21 @@ public class MysqlAccount implements Serializable {
 
     public void setSchool(String school) {
         this.school = school;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 }
