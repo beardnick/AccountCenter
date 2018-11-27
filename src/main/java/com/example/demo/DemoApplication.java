@@ -16,19 +16,19 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigure(){
-        return new WebMvcConfigurerAdapter() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                super.addCorsMappings(registry);
-                registry
-                        .addMapping("/**")
-                        .allowedHeaders("*")
-                        .allowedOrigins("*")
-                        .allowedMethods("*");
-            }
-        };
-    }
+//    @Bean
+//    public WebMvcConfigurer corsConfigure(){
+//        return new WebMvcConfigurerAdapter() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                super.addCorsMappings(registry);
+////                registry
+////                        .addMapping("/**")
+////                        .allowedHeaders("*")
+////                        .allowedOrigins("*")
+////                        .allowedMethods("*");
+//            }
+//        };
+//    }
 
 }
