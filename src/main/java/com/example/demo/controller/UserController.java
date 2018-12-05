@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import java.io.File;
+import org.springframework.web.multipart.MultipartFile; import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 
 @RestController
@@ -36,8 +34,8 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public ResultMap login(String email, String password, HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", "*");
+    public ResultMap login(String email, String password){
+//        response.addHeader("Access-Control-Allow-Origin", "*");
         if(containBean(email,password)){
             return ResultMap.success();
         }else{
@@ -50,9 +48,9 @@ public class UserController {
                               String password,
                               String name,
                               String group,
-                              String id,
-                              HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", "*");
+                              String id
+                              ){
+//        response.addHeader("Access-Control-Allow-Origin", "*");
 //        if(! password.equals(confirmPass)){
 //            return ResultMap.error("两次密码不一致");
 //        }
@@ -74,14 +72,14 @@ public class UserController {
 
 
     @RequestMapping("/all")
-    public ResultMap getAll(HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", "*");
+    public ResultMap getAll(){
+//        response.addHeader("Access-Control-Allow-Origin", "*");
         return ResultMap.success(repository.findAll());
     }
 
     @RequestMapping("/byname")
-    public ResultMap findByname(@PathParam("name")String name, HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", "*");
+    public ResultMap findByname(@PathParam("name")String name){
+//        response.addHeader("Access-Control-Allow-Origin", "*");
         MysqlAccount account;
         if((account = repository.findByName(name)) == null){
             return ResultMap.error("未查到名字为" + name + "的用户");
@@ -91,8 +89,8 @@ public class UserController {
     }
 
     @RequestMapping("/byemail")
-    public ResultMap findByemail(@PathParam("email")String email, HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", "*");
+    public ResultMap findByemail(@PathParam("email")String email){
+//        response.addHeader("Access-Control-Allow-Origin", "*");
         MysqlAccount account = null;
         if((account = repository.findByEmail(email)) == null){
             return ResultMap.error("未查到邮箱为" + email + "的用户");
@@ -102,8 +100,8 @@ public class UserController {
     }
 
     @RequestMapping("/bygroup")
-    public ResultMap byGroup(@PathParam("group")String group, HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", "*");
+    public ResultMap byGroup(@PathParam("group")String group){
+//        response.addHeader("Access-Control-Allow-Origin", "*");
         List<MysqlAccount> accounts;
         if((accounts = repository.findAllByGroup(group)) == null){
             return ResultMap.error("未查到名字为" + group + "的组");
@@ -113,8 +111,8 @@ public class UserController {
     }
 
     @RequestMapping("/change")
-    public ResultMap update(MysqlAccount account, HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", "*");
+    public ResultMap update(MysqlAccount account){
+//        response.addHeader("Access-Control-Allow-Origin", "*");
         System.out.println(account.getEmail() +
                 account.getName() +
                 account.getAvatar() +
@@ -130,10 +128,9 @@ public class UserController {
 
     @RequestMapping("/upload/avatar")
     public ResultMap editAvatar(
-            @RequestParam("file")MultipartFile file,
-            HttpServletResponse response
+            @RequestParam("file")MultipartFile file
             ){
-        response.addHeader("Access-Control-Allow-Origin", "*");
+//        response.addHeader("Access-Control-Allow-Origin", "*");
         if(file.isEmpty()){
             return ResultMap.error("文件为空");
         }
@@ -150,12 +147,13 @@ public class UserController {
             e.printStackTrace();
             return ResultMap.error("上传失败");
         }
-        return ResultMap.success("http://api.52feidian.com/api/avatar/" + file.getOriginalFilename());
+//        return ResultMap.success("http://api.52feidian.com/api/avatar/" + file.getOriginalFilename());
+        return ResultMap.success("http://123.207.19.172:8080/api/avatar/" + file.getOriginalFilename());
     }
 
     @RequestMapping("/delete")
-    public ResultMap delete(String email, HttpServletResponse response){
-        response.addHeader("Access-Control-Allow-Origin", "*");
+    public ResultMap delete(String email){
+//        response.addHeader("Access-Control-Allow-Origin", "*");
        if(containBean(email)){
            repository.deleteByEmail(email);
            return ResultMap.success(repository.findAll());
@@ -196,5 +194,39 @@ public class UserController {
 //            e.printStackTrace();
 //        }
 //    }
+
+
+    @RequestMapping("/search/name/{name}")
+    public ResultMap searchByName(@PathParam("name")String name){
+//        response.addHeader("Access-Control-Allow-Origin", "*");
+        MysqlAccount account;
+        if((account = repository.findByName(name)) == null){
+            return ResultMap.error("未查到名字为" + name + "的用户");
+        }else{
+            return ResultMap.success(account);
+        }
+    }
+
+    @RequestMapping("/search/email/{email}")
+    public ResultMap searchByEmail(@PathParam("email")String email){
+//        response.addHeader("Access-Control-Allow-Origin", "*");
+        MysqlAccount account = null;
+        if((account = repository.findByEmail(email)) == null){
+            return ResultMap.error("未查到邮箱为" + email + "的用户");
+        }else{
+            return ResultMap.success(account);
+        }
+    }
+
+    @RequestMapping("/search/group/{group}")
+    public ResultMap searchByGroup(@PathParam("group")String group){
+//        response.addHeader("Access-Control-Allow-Origin", "*");
+        List<MysqlAccount> accounts;
+        if((accounts = repository.findAllByGroup(group)) == null){
+            return ResultMap.error("未查到名字为" + group + "的组");
+        }else{
+            return ResultMap.success(accounts);
+        }
+    }
 
 }
