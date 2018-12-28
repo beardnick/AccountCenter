@@ -4,6 +4,7 @@ import com.example.demo.dao.MysqlAccountRepository;
 import com.example.demo.model.MysqlAccount;
 import com.example.demo.util.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile; import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import javax.websocket.server.PathParam;
 
 @RestController
 //@CrossOrigin(origins = "*")
@@ -78,7 +78,7 @@ public class UserController {
     }
 
     @RequestMapping("/byname")
-    public ResultMap findByname(@PathParam("name")String name){
+    public ResultMap findByname(String name){
 //        response.addHeader("Access-Control-Allow-Origin", "*");
         MysqlAccount account;
         if((account = repository.findByName(name)) == null){
@@ -87,9 +87,8 @@ public class UserController {
             return ResultMap.success(account);
         }
     }
-
-    @RequestMapping("/byemail")
-    public ResultMap findByemail(@PathParam("email")String email){
+@RequestMapping("/byemail")
+    public ResultMap findByemail(String email){
 //        response.addHeader("Access-Control-Allow-Origin", "*");
         MysqlAccount account = null;
         if((account = repository.findByEmail(email)) == null){
@@ -100,7 +99,7 @@ public class UserController {
     }
 
     @RequestMapping("/bygroup")
-    public ResultMap byGroup(@PathParam("group")String group){
+    public ResultMap byGroup(String group){
 //        response.addHeader("Access-Control-Allow-Origin", "*");
         List<MysqlAccount> accounts;
         if((accounts = repository.findAllByGroup(group)) == null){
@@ -197,7 +196,7 @@ public class UserController {
 
 
     @RequestMapping("/search/name/{name}")
-    public ResultMap searchByName(@PathParam("name")String name){
+    public ResultMap searchByName(@PathVariable("name")String name){
 //        response.addHeader("Access-Control-Allow-Origin", "*");
         MysqlAccount account;
         if((account = repository.findByName(name)) == null){
@@ -208,7 +207,7 @@ public class UserController {
     }
 
     @RequestMapping("/search/email/{email}")
-    public ResultMap searchByEmail(@PathParam("email")String email){
+    public ResultMap searchByEmail(@PathVariable("email")String email){
 //        response.addHeader("Access-Control-Allow-Origin", "*");
         MysqlAccount account = null;
         if((account = repository.findByEmail(email)) == null){
@@ -219,7 +218,7 @@ public class UserController {
     }
 
     @RequestMapping("/search/group/{group}")
-    public ResultMap searchByGroup(@PathParam("group")String group){
+    public ResultMap searchByGroup(@PathVariable("group")String group){
 //        response.addHeader("Access-Control-Allow-Origin", "*");
         List<MysqlAccount> accounts;
         if((accounts = repository.findAllByGroup(group)) == null){
