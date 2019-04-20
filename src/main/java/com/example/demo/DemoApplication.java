@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import javafx.beans.value.WeakChangeListener;
+//import javafx.beans.value.WeakChangeListener;
 
 @SpringBootApplication
 public class DemoApplication {
