@@ -1,25 +1,19 @@
 package com.example.demo.model;
 
-
 import org.springframework.format.annotation.DateTimeFormat;
-
-import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "feidian")
 public class MysqlAccount implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-//    @Id
-//    @GeneratedValue
-//    private Long id;
 
     @Id
     private String email;
@@ -44,9 +38,6 @@ public class MysqlAccount implements Serializable {
 
     @Column(name = "_group")
     private String group;
-
-//    @Column
-//    private int feidianID;
 
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -102,18 +93,13 @@ public class MysqlAccount implements Serializable {
     @Column
     private String lastName;
 
+    @Column
+    private String spell;
+
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
-
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
     public String getName() {
         return name;
@@ -313,5 +299,13 @@ public class MysqlAccount implements Serializable {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public String getSpell() {
+        return spell;
+    }
+
+    public void setSpell(String spell) {
+        this.spell = spell;
     }
 }

@@ -1,31 +1,86 @@
 package com.example.demo.model;
 
-
-import org.springframework.ldap.odm.annotations.Attribute;
-import org.springframework.ldap.odm.annotations.Entry;
-import org.springframework.ldap.odm.annotations.Id;
+import org.springframework.ldap.odm.annotations.*;
 
 import javax.naming.Name;
 
-@Entry(objectClasses ="inetOrgPerson" , base = "ou=feidian, dc=ldap, dc=52feidian, dc=com")
+@Entry(objectClasses = {"inetOrgPerson", "top"}, base = "ou=feidian, dc=ldap, dc=52feidian, dc=com")
 public class LdapAccount {
 
     @Id
-    private Long id;
+    private Name dN;
 
-    @Attribute(name="cn")
-    private String name;
-
-    @Attribute(name="mail")
-    private String mail;
-
-    @Attribute(name="givenName")
-    private String firstName;
+    @Attribute(name = "cn")
+    private String cn;
 
     @Attribute(name = "sn")
-    private String lastName;
+    private String sn;
+
+    @Attribute(name = "mail")
+    private String mail;
+
+    @Attribute(name = "givenName")
+    private String givenName;
 
     @Attribute(name = "userPassword")
-    private String password;
+    private String userPassword;
 
+    public Name getDn() {
+        return dN;
+    }
+
+    public void setDn(Name dn) {
+        this.dN = dn;
+    }
+
+    public String getCn() {
+        return cn;
+    }
+
+    public void setCn(String cn) {
+        this.cn = cn;
+    }
+
+    public String getSn() {
+        return sn;
+    }
+
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getGivenName() {
+        return givenName;
+    }
+
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    @Override
+    public String toString() {
+        return "LdapAccount{" +
+                "DN='" + dN + '\'' +
+                ", cn='" + cn + '\'' +
+                ", sn='" + sn + '\'' +
+                ", mail='" + mail + '\'' +
+                ", givenName='" + givenName + '\'' +
+                '}';
+    }
 }
