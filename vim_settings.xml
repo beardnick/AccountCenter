@@ -1,0 +1,136 @@
+<application>
+  <component name="VimSettings">
+    <state version="4" enabled="true" />
+    <globalmarks />
+    <filemarks>
+      <file name="$USER_HOME$/program/Java/AccountCenter-master/src/main/resources/application-prod.properties" timestamp="1558232345560">
+        <mark key="[" line="3" column="0" />
+        <mark key="]" line="3" column="16" />
+        <mark key="." line="3" column="0" />
+        <mark key="^" line="6" column="43" />
+      </file>
+      <file name="$USER_HOME$/program/Java/AccountCenter-master/src/main/resources/application-dev.properties" timestamp="1558232349198">
+        <mark key="[" line="3" column="0" />
+        <mark key="]" line="3" column="16" />
+        <mark key="." line="3" column="0" />
+      </file>
+      <file name="/Dummy.txt" timestamp="1558192713200">
+        <mark key="[" line="0" column="0" />
+      </file>
+      <file name="$USER_HOME$/program/Java/AccountCenter-master/src/main/java/com/example/demo/controller/UserController.java" timestamp="1558230858688">
+        <mark key="[" line="52" column="0" />
+        <mark key="]" line="52" column="0" />
+        <mark key="." line="52" column="0" />
+        <mark key="^" line="188" column="59" />
+      </file>
+      <file name="$USER_HOME$/program/demo/src/main/java/com/example/demo/dao/MysqlAccountRepository.java" timestamp="1558232856252">
+        <mark key="[" line="4" column="0" />
+        <mark key="]" line="4" column="0" />
+        <mark key="." line="4" column="0" />
+      </file>
+      <file name="$USER_HOME$/program/Java/AccountCenter-master/src/main/java/com/example/demo/model/MysqlAccount.java" timestamp="1558232462227">
+        <mark key="[" line="4" column="0" />
+        <mark key="]" line="7" column="31" />
+      </file>
+      <file name="$USER_HOME$/program/Java/AccountCenter-master/pom.xml" timestamp="1558233714341">
+        <mark key="'" line="42" column="20" />
+        <mark key="[" line="90" column="21" />
+        <mark key="]" line="91" column="7" />
+        <mark key="." line="91" column="7" />
+        <mark key="^" line="91" column="7" />
+      </file>
+      <file name="$USER_HOME$/program/Java/demo/src/main/java/com/example/demo/Controller/HelloController.java" timestamp="1558231960688">
+        <mark key="[" line="6" column="30" />
+        <mark key="]" line="7" column="27" />
+        <mark key="^" line="7" column="27" />
+        <mark key="." line="7" column="27" />
+      </file>
+      <file name="$USER_HOME$/program/Java/AccountCenter-master/src/main/resources/application.properties" timestamp="1558189458605">
+        <mark key="[" line="0" column="24" />
+        <mark key="]" line="0" column="25" />
+        <mark key="." line="0" column="25" />
+        <mark key="^" line="0" column="25" />
+      </file>
+      <file name="$USER_HOME$/program/demo/src/main/java/com/example/demo/HelloController.java" timestamp="1558232632783">
+        <mark key="[" line="4" column="0" />
+        <mark key="]" line="4" column="0" />
+        <mark key="^" line="4" column="0" />
+        <mark key="." line="4" column="0" />
+      </file>
+      <file name="$USER_HOME$/program/Java/AccountCenter-master/src/main/java/com/example/demo/util/ResultMap.java" timestamp="1558231033865" />
+      <file name="/a.sql" timestamp="1558192713192">
+        <mark key="[" line="0" column="0" />
+      </file>
+      <file name="$USER_HOME$/program/demo/src/main/resources/application.properties" timestamp="1558232306511">
+        <mark key="[" line="4" column="0" />
+        <mark key="]" line="6" column="25" />
+        <mark key="." line="4" column="0" />
+      </file>
+      <file name="/Dummy.vm" timestamp="1558234477199">
+        <mark key="[" line="0" column="0" />
+      </file>
+      <file name="/fragment.java" timestamp="1558232706581">
+        <mark key="[" line="0" column="0" />
+      </file>
+    </filemarks>
+    <jumps>
+      <jump line="42" column="20" filename="$USER_HOME$/program/Java/AccountCenter-master/pom.xml" />
+    </jumps>
+    <registers>
+      <register name="0" type="2">
+        <text encoding="base64">aW1wb3J0IGphdmF4LnBlcnNpc3RlbmNlLkNvbHVtbjsKaW1wb3J0IGphdmF4LnBlcnNpc3RlbmNlLkVudGl0eTsKaW1wb3J0IGphdmF4LnBlcnNpc3RlbmNlLklkOwppbXBvcnQgamF2YXgucGVyc2lzdGVuY2UuVGFibGU7Cg==</text>
+      </register>
+      <register name="1" type="2">
+        <text encoding="base64">ICAgICAgICAK</text>
+      </register>
+      <register name="&quot;" type="2">
+        <text encoding="base64">ICAgICAgICAK</text>
+      </register>
+      <register name="2" type="2">
+        <text encoding="base64">ICAgICAgICA8dmVyc2lvbj4yLjMuMDwvdmVyc2lvbj4K</text>
+      </register>
+      <register name="3" type="2">
+        <text encoding="base64">ICAgICAgICAgICAgPHZlcnNpb24+Mi4zLjA8L3ZlcnNpb24+Cg==</text>
+      </register>
+      <register name="4" type="2">
+        <text encoding="base64">aW1wb3J0IG9yZy5zcHJpbmdmcmFtZXdvcmsudHJhbnNhY3Rpb24uYW5ub3RhdGlvbi5UcmFuc2FjdGlvbmFsOwo=</text>
+      </register>
+      <register name="5" type="2">
+        <text encoding="base64">ICAgIEBUcmFuc2FjdGlvbmFsCg==</text>
+      </register>
+      <register name="6" type="2">
+        <text encoding="base64">aW1wb3J0IGphdmF4LnBlcnNpc3RlbmNlLkNvbHVtbjsKaW1wb3J0IGphdmF4LnBlcnNpc3RlbmNlLkVudGl0eTsKaW1wb3J0IGphdmF4LnBlcnNpc3RlbmNlLklkOwppbXBvcnQgamF2YXgucGVyc2lzdGVuY2UuVGFibGU7Cg==</text>
+      </register>
+      <register name="7" type="2">
+        <text encoding="base64">Cg==</text>
+      </register>
+      <register name="8" type="2">
+        <text encoding="base64">ICAgICAgICByZXR1cm4gImhlbGxvIHNwcmluZ2Jvb3QhIjsK</text>
+      </register>
+      <register name="9" type="2">
+        <text encoding="base64">ICAgICAgICByZXR1cm4gImhlbGxvIHNwcmluZ2Jvb3QhIjsK</text>
+      </register>
+      <register name="-" type="4">
+        <text />
+      </register>
+    </registers>
+    <search>
+      <last-dir>0</last-dir>
+      <show-last>false</show-last>
+    </search>
+    <history>
+      <history-search />
+      <history-cmd />
+      <history-expr />
+      <history-input />
+    </history>
+    <shortcut-conflicts>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed C</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed V</text>
+      </shortcut-conflict>
+    </shortcut-conflicts>
+  </component>
+</application>
